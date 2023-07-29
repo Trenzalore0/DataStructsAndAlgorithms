@@ -2,6 +2,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <string.h>
 
 template<class T> void print_vector(const std::vector<T>& v) {
   if (v.size() == 0) {
@@ -18,6 +19,43 @@ template<class T> void print_vector(const std::vector<T>& v) {
 bool f1(int n) {
   return n % 2 == 0;
 }
+
+class Person {
+  public:
+    Person(char* n = "", int a = 0) {
+      age = a;
+      name = strdup(n);
+    }
+
+    ~Person() {
+      free(name);
+    }
+
+    bool operator==(const Person& p) const {
+      return strcmp(name, p.name) == 0 && age == p.age;
+    }
+
+    bool operator<(const Person& p) const {
+      return strcmp(name, p.name) < 0;
+    }
+
+    bool operator>(const Person& p) const {
+      return !(*this == p) && !(*this < p);
+    }
+
+    char* getName() {
+      return name;
+    }
+
+    int getAge() {
+      return age;
+    }
+
+  private:
+    char* name;
+    int age;
+    friend bool lowerAge(const Person&, const Person&);
+};
 
 void execute() {
   std::vector<int> v1 = std::vector<int>();
@@ -48,8 +86,22 @@ void execute() {
   std::sort(v1.begin(), v1.end());
   print_vector(v1);
 
-  std::sort(v1.begin(), v1.end(), std::greater <int> ());
+  std::sort(v1.begin(), v1.end(), std::greater<int>());
   print_vector(v1);
 
-  v1.front() = 2;
+  // v1.front() = 2;
+
+  std::vector<Person> v2(0, Person("Gregg", 25));
+  v2.push_back(Person("Ann", 30));
+  // v2.push_back(Person("Bill", 20));
+
+  std::cout << "test" << std::endl;
+
+  std::sort(v2.begin(), v2.end());
+  for (Person& person : v2) {
+    std::cout << person.getAge() << " " << (char*)person.getName() << std::endl;
+  }
+
+  // std::sort(v2.begin(), v2.end(), std::greater<Person>());
+  // print_vector(v2);
 }
