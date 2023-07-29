@@ -1,4 +1,4 @@
-# Learn Cpp with datastructs and algoriths
+# Learn Cpp with datastructs and Algorithms
 
 <p>
 This project is based on book 
