@@ -1,9 +1,11 @@
 #include <iostream>
 #include <vector>
 
-int main() {
+typedef std::vector<std::pair<int, std::pair<bool, std::string>>> numberRomanStruct;
 
-  std::vector<std::pair<int, std::pair<bool, std::string>>> translation = {
+void execute() {
+
+  numberRomanStruct translation = {
     { 1000, { true, "M" } },{ 500, { false, "D" } },{ 100, { true, "C" } }, { 50, { false, "L" } }, { 10, { true, "X" } }, { 5, { false, "V" } }, { 1, { true, "I" } }
   };
 
@@ -87,6 +89,4 @@ int main() {
   }
 
   std::cout << "The number " << numberChoossed << " is " << output << " in roman number" << std::endl;
-
-  return 0;
 }
